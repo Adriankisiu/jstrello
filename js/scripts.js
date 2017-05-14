@@ -7,6 +7,7 @@ $(function() {
  	    }
     return str;
 	}
+
 	function Column(name) {
     	var self = this;
 
@@ -14,36 +15,36 @@ $(function() {
     	this.name = name;
     	this.$element = createColumn();
 
-    	function createColumn() {
-    		var $column = $('<div>').addClass('column');
-			var $columnTitle = $('<h2>').addClass('column-title').text(self.name);
-			var $columnCardList = $('<ul>').addClass('column-card-list');
-			var $columnDelete = $('<button>').addClass('btn-delete').text('x');
-			var $columnAddCard = $('<button>').addClass('add-card').text('Dodaj kartę');
+    function createColumn() {
+    	var $column = $('<div>').addClass('column');
+		var $columnTitle = $('<h2>').addClass('column-title').text(self.name);
+		var $columnCardList = $('<ul>').addClass('column-card-list');
+		var $columnDelete = $('<button>').addClass('btn-delete').text('x');
+		var $columnAddCard = $('<button>').addClass('add-card').text('Dodaj kartę');
 
-			$columnDelete.click(function() {
-        		self.removeColumn();
-			});
+		$columnDelete.click(function() {
+        	self.removeColumn();
+		});
 
-			$columnAddCard.click(function() {
-        		self.addCard(new Card(prompt("Wpisz nazwę karty")));
-			});
+		$columnAddCard.click(function() {
+        	self.addCard(new Card(prompt("Wpisz nazwę karty")));
+		});
 
-			$column.append($columnTitle)
-        		.append($columnDelete)
-        		.append($columnAddCard)
-        		.append($columnCardList);
+		$column.append($columnTitle)
+       		.append($columnDelete)
+       		.append($columnAddCard)
+      		.append($columnCardList);
 
-			return $column;
-    	}
+		return $column;
+    }
   	}
 
   	Column.prototype = {
     	addCard: function(card) {
       		this.$element.children('ul').append(card.$element);
     	},
-   		 removeColumn: function() {
-     		 this.$element.remove();
+   		removeColumn: function() {
+     		this.$element.remove();
     	}
 	};
 
@@ -54,21 +55,22 @@ $(function() {
 	this.description = description;
 	this.$element = createCard();
 
-		function createCard() {
-			var $card = $('<li>').addClass('card');
-			var $cardDescription = $('<p>').addClass('card-description').text(self.description);
-			var $cardDelete = $('<button>').addClass('btn-delete').text('x');
+	function createCard() {
+		var $card = $('<li>').addClass('card');
+		var $cardDescription = $('<p>').addClass('card-description').text(self.description);
+		var $cardDelete = $('<button>').addClass('btn-delete').text('x');
 
-			$cardDelete.click(function(){
-        		self.removeCard();
-			});
+		$cardDelete.click(function(){
+        	self.removeCard();
+		});
 
-			$card.append($cardDelete)
-				.append($cardDescription);
+		$card.append($cardDelete)
+			.append($cardDescription);
 
-			return $card;
+		return $card;
 		}
 	}
+
 	Card.prototype = {
 		removeCard: function() {
 			this.$element.remove();
@@ -81,6 +83,7 @@ $(function() {
       		this.$element.append(column.$element);
       		initSortable();
     	},
+
     $element: $('#board .column-container')
 	};	
 
@@ -112,4 +115,3 @@ $(function() {
 	todoColumn.addCard(card1);
 	doingColumn.addCard(card2);
 });
-
